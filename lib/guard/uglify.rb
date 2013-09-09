@@ -30,7 +30,7 @@ module Guard
     private
     def uglify
       begin
-        uglified = Uglifier.new.compile(File.read(@input))
+        uglified = Uglifier.new(:output => {:comments => :none}).compile(File.read(@input))
         File.open(@output,'w'){ |f| f.write(uglified) }
         UI.info         "Uglified #{@input} to #{@output}"
         Notifier.notify "Uglified #{@input} to #{@output}", :title => 'Uglify'
